@@ -1,665 +1,761 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>長照3.0照護課程 — 專業照護，從這裡開始</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>照護好時光 | 長照看護招募網站</title>
+  <meta name="description" content="照護好時光為長照中心招募台灣看護人才，介紹公司背景、工作內容、培訓支持與應徵方式，所有諮詢與應徵皆可透過 Line 聯繫。">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --brand:       #5C8A6A;
-      --brand-dark:  #3D6B50;
-      --brand-light: #EAF3EC;
-      --accent:      #E8A060;
-      --accent-dark: #C97E3A;
-      --warm:        #FDF6EE;
-      --text:        #2C3E35;
-      --text-muted:  #6B7C74;
-      --white:       #FFFFFF;
-      --line-green:  #06C755;
+      --bg: #f7f2ea;
+      --surface: rgba(255, 251, 246, 0.92);
+      --surface-strong: #fffdf9;
+      --text: #1f2a2d;
+      --muted: #617074;
+      --line: #d9cec1;
+      --line-strong: #bfae9a;
+      --accent: #f3a93b;
+      --accent-deep: #ca7a17;
+      --accent-soft: #fff2dc;
+      --support: #3f7c85;
+      --shadow: 0 24px 60px rgba(45, 37, 28, 0.12);
+      --radius: 24px;
+      --max: 1240px;
+      --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      --line-url: "https://line.me/ti/p/mKkX_ZUmwg";
     }
 
+    * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Noto Sans TC', sans-serif;
+      margin: 0;
+      font-family: var(--font);
       color: var(--text);
-      background: var(--warm);
-      line-height: 1.7;
+      background:
+        radial-gradient(circle at top left, rgba(243, 169, 59, 0.24), transparent 28%),
+        radial-gradient(circle at 85% 12%, rgba(63, 124, 133, 0.16), transparent 20%),
+        linear-gradient(180deg, #fffaf3 0%, var(--bg) 100%);
+      line-height: 1.6;
     }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(92,138,106,0.12);
-      padding: 0 5%;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 64px;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(95, 114, 116, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(95, 114, 116, 0.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.22), transparent 78%);
     }
-    .nav-logo {
-      font-family: 'Noto Serif TC', serif;
-      font-size: 1.1rem; font-weight: 700;
-      color: var(--brand-dark);
-      text-decoration: none;
-    }
-    .nav-cta {
-      background: var(--line-green);
-      color: #fff;
-      padding: 9px 22px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 0.9rem; font-weight: 600;
-      display: flex; align-items: center; gap: 7px;
-      transition: opacity 0.2s;
-    }
-    .nav-cta:hover { opacity: 0.85; }
-    .nav-cta svg { width: 18px; height: 18px; }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin: 0; }
+
+    .page-shell {
+      width: min(calc(100% - 28px), var(--max));
+      margin: 18px auto 36px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      overflow: hidden;
+      background: rgba(255, 253, 249, 0.76);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
       align-items: center;
-      padding: 80px 8% 60px;
-      gap: 60px;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 250, 243, 0.92);
+      backdrop-filter: blur(16px);
     }
-    .hero-text {}
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--brand-light);
-      color: var(--brand-dark);
-      border: 1px solid rgba(92,138,106,0.3);
-      padding: 6px 16px;
-      border-radius: 50px;
-      font-size: 0.82rem; font-weight: 600;
-      margin-bottom: 24px;
-      letter-spacing: 0.04em;
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
     }
-    .hero-badge::before { content: "🌿"; }
-    h1 {
-      font-family: 'Noto Serif TC', serif;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 1.3;
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+      color: #fff;
+      font-size: 18px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .cta-chip,
+    .cta-button,
+    .cta-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.28s cubic-bezier(.4,0,.2,1), border-color 0.28s cubic-bezier(.4,0,.2,1), background 0.28s cubic-bezier(.4,0,.2,1);
+    }
+
+    .cta-chip {
+      padding: 12px 18px;
+      border: 1px solid rgba(202, 122, 23, 0.16);
+      background: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+    }
+
+    .cta-button {
+      padding: 14px 22px;
+      background: var(--accent);
+      color: #261302;
+      box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .cta-outline {
+      padding: 14px 22px;
+      border: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, 0.72);
       color: var(--text);
-      margin-bottom: 20px;
     }
-    h1 em { font-style: normal; color: var(--brand); }
-    .hero-sub {
-      font-size: 1.05rem; color: var(--text-muted);
-      max-width: 480px; margin-bottom: 36px;
+
+    .cta-chip:hover,
+    .cta-button:hover,
+    .cta-outline:hover,
+    .feature-card:hover,
+    .story-card:hover,
+    .faq-item:hover,
+    .value-stat:hover,
+    .timeline-card:hover {
+      transform: translateY(-2px);
     }
-    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--brand);
-      color: #fff;
-      padding: 14px 32px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 1rem; font-weight: 600;
-      display: inline-flex; align-items: center; gap: 10px;
-      transition: background 0.2s, transform 0.15s;
-      box-shadow: 0 4px 20px rgba(92,138,106,0.35);
+
+    .section { border-bottom: 1px solid var(--line); }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      width: 100%;
     }
-    .btn-primary:hover { background: var(--brand-dark); transform: translateY(-2px); }
-    .btn-line {
-      background: var(--line-green);
-      color: #fff;
-      padding: 14px 32px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 1rem; font-weight: 600;
-      display: inline-flex; align-items: center; gap: 10px;
-      transition: opacity 0.2s, transform 0.15s;
-      box-shadow: 0 4px 20px rgba(6,199,85,0.3);
+
+    .cell-left,
+    .cell-right,
+    .cell-full {
+      padding: 30px 28px;
+      position: relative;
     }
-    .btn-line:hover { opacity: 0.88; transform: translateY(-2px); }
-    .hero-stats {
-      display: flex; gap: 32px; margin-top: 44px;
-      padding-top: 32px; border-top: 1px solid rgba(92,138,106,0.15);
+
+    .cell-left { border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+    .cell-right { border-right: 1px solid var(--line); }
+    .cell-full { border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+
+    .hero-copy {
+      grid-column: span 7;
+      padding-top: 56px;
+      padding-bottom: 56px;
     }
-    .stat-item { text-align: left; }
-    .stat-num {
-      font-family: 'Noto Serif TC', serif;
-      font-size: 1.8rem; font-weight: 700;
-      color: var(--brand-dark);
+
+    .hero-panel {
+      grid-column: span 5;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(180deg, rgba(63, 124, 133, 0.05), rgba(243, 169, 59, 0.1)),
+        var(--surface);
     }
-    .stat-label { font-size: 0.82rem; color: var(--text-muted); }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    h1 {
+      margin-top: 24px;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-copy p {
+      margin-top: 22px;
+      max-width: 620px;
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .hero-micro {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero-micro span {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(191, 174, 154, 0.52);
+    }
 
     .hero-visual {
-      position: relative;
-      border-radius: 24px; overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.14);
-    }
-    .hero-visual img { width: 100%; display: block; }
-    .hero-visual-badge {
-      position: absolute; bottom: 20px; left: 20px;
-      background: rgba(255,255,255,0.95);
-      border-radius: 14px; padding: 12px 18px;
-      display: flex; align-items: center; gap: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-    .hvb-icon { font-size: 1.8rem; }
-    .hvb-text .hvb-title { font-weight: 600; font-size: 0.9rem; color: var(--text); }
-    .hvb-text .hvb-sub { font-size: 0.78rem; color: var(--text-muted); }
-
-    /* ── SECTION SHARED ── */
-    section { padding: 80px 8%; }
-    .section-label {
-      display: inline-block;
-      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em;
-      color: var(--brand); text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-family: 'Noto Serif TC', serif;
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      line-height: 1.35;
-      margin-bottom: 16px;
-    }
-    .section-sub { color: var(--text-muted); max-width: 600px; font-size: 1rem; }
-    .section-header { margin-bottom: 56px; }
-    .section-header.center { text-align: center; }
-    .section-header.center .section-sub { margin: 0 auto; }
-
-    /* ── WHY US ── */
-    .why-us { background: #fff; }
-    .why-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 28px;
+      gap: 16px;
     }
-    .why-card {
-      background: var(--warm);
-      border: 1px solid rgba(92,138,106,0.12);
+
+    .metric-board {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .value-stat {
+      padding: 20px;
       border-radius: 20px;
-      padding: 32px 28px;
-      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid rgba(191, 174, 154, 0.6);
+      background: rgba(255, 255, 255, 0.86);
+      transition: transform 0.28s cubic-bezier(.4,0,.2,1), border-color 0.28s cubic-bezier(.4,0,.2,1);
     }
-    .why-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(92,138,106,0.15); }
-    .why-icon { font-size: 2.4rem; margin-bottom: 18px; }
-    .why-title { font-family: 'Noto Serif TC', serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
-    .why-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; }
 
-    /* ── CURRICULUM ── */
-    .curriculum { background: var(--brand-light); }
-    .curriculum-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+    .value-stat strong {
+      display: block;
+      font-size: 34px;
+      line-height: 1;
+      margin-bottom: 10px;
     }
-    .module-card {
-      background: #fff;
+
+    .value-stat span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .science-note {
+      margin-top: 18px;
+      padding: 18px 18px 18px 20px;
+      border-left: 4px solid var(--support);
+      background: rgba(230, 245, 247, 0.84);
       border-radius: 18px;
-      padding: 28px 24px;
-      border-left: 4px solid var(--brand);
-      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
     }
-    .module-num { font-size: 0.78rem; color: var(--brand); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 8px; }
-    .module-title { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; }
-    .module-list { list-style: none; }
-    .module-list li { font-size: 0.88rem; color: var(--text-muted); padding: 4px 0; display: flex; gap: 8px; }
-    .module-list li::before { content: "✓"; color: var(--brand); font-weight: 700; flex-shrink: 0; }
 
-    /* ── WHO IS THIS FOR ── */
-    .audience { background: #fff; }
-    .audience-grid {
+    .section-intro {
+      grid-column: span 4;
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .section-body { grid-column: span 8; }
+
+    .kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-deep);
+      font-weight: 700;
+    }
+
+    .section-intro h2 {
+      margin-top: 16px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .section-intro p {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .feature-grid,
+    .story-grid,
+    .faq-grid,
+    .timeline-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
+      gap: 16px;
     }
-    .audience-card {
-      text-align: center;
-      padding: 36px 24px;
-      background: var(--warm);
-      border-radius: 20px;
-      border: 1px solid rgba(92,138,106,0.1);
-      transition: transform 0.2s;
-    }
-    .audience-card:hover { transform: translateY(-4px); }
-    .audience-emoji { font-size: 3rem; margin-bottom: 16px; }
-    .audience-title { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
-    .audience-desc { font-size: 0.88rem; color: var(--text-muted); }
 
-    /* ── TESTIMONIALS ── */
-    .testimonials { background: var(--brand-dark); color: #fff; }
-    .testimonials .section-label { color: var(--accent); }
-    .testimonials .section-title { color: #fff; }
-    .testimonials .section-sub { color: rgba(255,255,255,0.65); }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-    .testi-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px;
-      padding: 28px 24px;
-    }
-    .testi-stars { color: var(--accent); font-size: 1rem; margin-bottom: 14px; letter-spacing: 2px; }
-    .testi-quote { font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.85); margin-bottom: 20px; }
-    .testi-author { display: flex; align-items: center; gap: 12px; }
-    .testi-avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--brand); display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem;
-    }
-    .testi-name { font-weight: 600; font-size: 0.9rem; color: #fff; }
-    .testi-role { font-size: 0.8rem; color: rgba(255,255,255,0.55); }
+    .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .story-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .faq-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .timeline-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-    /* ── FAQ ── */
-    .faq { background: var(--warm); }
-    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
-    .faq-item {
-      background: #fff;
+    .feature-card,
+    .story-card,
+    .faq-item,
+    .timeline-card {
+      padding: 22px;
+      border-radius: 22px;
+      border: 1px solid rgba(191, 174, 154, 0.58);
+      background: var(--surface-strong);
+      transition: transform 0.28s cubic-bezier(.4,0,.2,1), border-color 0.28s cubic-bezier(.4,0,.2,1);
+    }
+
+    .feature-card:hover,
+    .story-card:hover,
+    .faq-item:hover,
+    .timeline-card:hover,
+    .value-stat:hover {
+      border-color: var(--support);
+    }
+
+    .feature-icon {
+      width: 42px;
+      height: 42px;
       border-radius: 14px;
-      border: 1px solid rgba(92,138,106,0.12);
-      overflow: hidden;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      font-weight: 800;
     }
-    .faq-q {
-      padding: 20px 24px;
-      font-weight: 600; font-size: 0.98rem;
-      cursor: pointer;
-      display: flex; justify-content: space-between; align-items: center;
-      user-select: none;
-    }
-    .faq-q::after { content: "+"; font-size: 1.4rem; color: var(--brand); font-weight: 300; }
-    .faq-a { padding: 0 24px 20px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; }
 
-    /* ── FINAL CTA ── */
+    .feature-card h3,
+    .story-card h3,
+    .faq-item h3,
+    .timeline-card h3 {
+      font-size: 20px;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p,
+    .story-card p,
+    .faq-item p,
+    .timeline-card p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .story-meta,
+    .timeline-meta {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .story-meta span,
+    .timeline-meta span {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255, 242, 220, 0.84);
+      border: 1px solid rgba(191, 174, 154, 0.42);
+    }
+
+    .role-sheet {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .role-panel,
+    .support-panel {
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid rgba(191, 174, 154, 0.56);
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(252, 247, 240, 0.94));
+    }
+
+    .duty-list {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .duty-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(217, 206, 193, 0.92);
+      font-size: 15px;
+    }
+
+    .duty-item span:last-child {
+      color: var(--support);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .support-stack {
+      margin-top: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .support-box {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(230, 245, 247, 0.8);
+      border: 1px solid rgba(157, 198, 204, 0.6);
+    }
+
     .final-cta {
-      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
-      text-align: center; color: #fff; padding: 100px 8%;
-    }
-    .final-cta .section-label { color: rgba(255,255,255,0.7); }
-    .final-cta h2 {
-      font-family: 'Noto Serif TC', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      color: #fff; margin-bottom: 16px; line-height: 1.35;
-    }
-    .final-cta p { color: rgba(255,255,255,0.75); font-size: 1rem; max-width: 520px; margin: 0 auto 40px; }
-    .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn-white {
-      background: #fff; color: var(--brand-dark);
-      padding: 15px 36px; border-radius: 50px;
-      text-decoration: none; font-size: 1rem; font-weight: 700;
-      display: inline-flex; align-items: center; gap: 10px;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.15);
-    }
-    .btn-white:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.2); }
-    .btn-line-large {
-      background: var(--line-green); color: #fff;
-      padding: 15px 36px; border-radius: 50px;
-      text-decoration: none; font-size: 1rem; font-weight: 700;
-      display: inline-flex; align-items: center; gap: 10px;
-      transition: opacity 0.2s, transform 0.15s;
-      box-shadow: 0 6px 24px rgba(6,199,85,0.4);
-    }
-    .btn-line-large:hover { opacity: 0.88; transform: translateY(-3px); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #1A2920;
-      color: rgba(255,255,255,0.55);
+      grid-column: span 12;
+      background: linear-gradient(120deg, rgba(255,255,255,0.84), rgba(255, 242, 220, 0.92));
       text-align: center;
-      padding: 32px 8%;
-      font-size: 0.85rem;
-    }
-    footer a { color: var(--line-green); text-decoration: none; }
-
-    /* ── LINE FLOAT ── */
-    .line-float {
-      position: fixed; bottom: 28px; right: 28px; z-index: 200;
-      background: var(--line-green);
-      color: #fff;
-      width: 60px; height: 60px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      text-decoration: none;
-      box-shadow: 0 6px 24px rgba(6,199,85,0.5);
-      transition: transform 0.2s, box-shadow 0.2s;
-      animation: pulse 2.5s infinite;
-    }
-    .line-float:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(6,199,85,0.6); }
-    .line-float svg { width: 32px; height: 32px; }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 6px 24px rgba(6,199,85,0.5); }
-      50% { box-shadow: 0 6px 36px rgba(6,199,85,0.8); }
+      padding-top: 54px;
+      padding-bottom: 54px;
     }
 
-    /* ── DIVIDER ── */
-    .wave-divider { line-height: 0; }
-    .wave-divider svg { display: block; width: 100%; }
+    .final-cta h2 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      max-width: 780px;
+      margin: 0 auto;
+    }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 100px 6% 60px;
-        text-align: center;
+    .final-cta p {
+      max-width: 660px;
+      margin: 18px auto 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    footer {
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-copy,
+      .hero-panel,
+      .section-intro,
+      .section-body,
+      .final-cta { grid-column: span 12; }
+
+      .section-intro { border-right: 1px solid var(--line); }
+      .feature-grid,
+      .faq-grid,
+      .role-sheet { grid-template-columns: 1fr; }
+      .story-grid,
+      .timeline-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      .page-shell {
+        width: min(calc(100% - 16px), var(--max));
+        margin: 8px auto 16px;
+        border-radius: 22px;
       }
-      .hero-sub { margin: 0 auto 36px; }
-      .hero-ctas { justify-content: center; }
-      .hero-stats { justify-content: center; }
-      .hero-visual { order: -1; }
-      nav { padding: 0 6%; }
-      section { padding: 60px 6%; }
+
+      .site-nav { padding: 14px 16px; }
+      .cell-left, .cell-right, .cell-full { padding: 22px 16px; }
+      .metric-board,
+      .feature-grid,
+      .story-grid,
+      .faq-grid,
+      .timeline-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      h1 { font-size: 2.7rem; }
+      .final-cta h2 { font-size: 2.3rem; }
+      footer { padding: 18px 16px 22px; }
     }
   </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#">🌿 長照3.0照護課程</a>
-  <a class="nav-cta" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.96 1.53 5.59 3.93 7.3L5 21l2.88-1.5C9.12 19.8 10.53 20 12 20c5.52 0 10-4.03 10-9S17.52 2 12 2z"/></svg>
-    立即諮詢
-  </a>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-text">
-    <div class="hero-badge">長照3.0照護課程 — 全新升級版</div>
-    <h1>照護<em>不只是工作</em><br/>更是一門<em>專業</em></h1>
-    <p class="hero-sub">
-      無論您是想投入長照產業、照顧家中長輩，或正在尋找穩定職涯方向——
-      我們的長照3.0課程，讓您從零開始，系統掌握照護技能，開啟有意義的第二人生。
-    </p>
-    <div class="hero-ctas">
-      <a class="btn-primary" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noopener">
-        🎓 了解課程內容
+  <div class="page-shell">
+    <nav class="site-nav" aria-label="主選單">
+      <a class="brand" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noreferrer">
+        <span class="brand-mark">護</span>
+        <span>照護好時光</span>
       </a>
-      <a class="btn-line" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.96 1.53 5.59 3.93 7.3L5 21l2.88-1.5C9.12 19.8 10.53 20 12 20c5.52 0 10-4.03 10-9S17.52 2 12 2z"/></svg>
-        LINE 免費諮詢
-      </a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">500+</div>
-        <div class="stat-label">結業學員</div>
+      <div class="nav-links">
+        <a href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noreferrer">公司介紹</a>
+        <a href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noreferrer">工作內容</a>
+        <a href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noreferrer">應徵流程</a>
+        <a href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noreferrer">Line 諮詢</a>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">95%</div>
-        <div class="stat-label">學員就業率</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">3.0</div>
-        <div class="stat-label">最新課程版本</div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <img src="https://api.kuse.ai/api/folder/v1/file/d843ef5408771b1d3ee953e8aa935a653a532911748abc04e8a626f2905ef316_7090834.jpeg" alt="長照照護溫馨場景" />
-    <div class="hero-visual-badge">
-      <div class="hvb-icon">🏅</div>
-      <div class="hvb-text">
-        <div class="hvb-title">政府認可課程</div>
-        <div class="hvb-sub">符合長照3.0政策規範</div>
-      </div>
-    </div>
-  </div>
-</section>
+      <a class="cta-chip" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noreferrer">立即加入 Line</a>
+    </nav>
 
-<!-- WHY US -->
-<section class="why-us">
-  <div class="section-header center">
-    <span class="section-label">為什麼選擇我們</span>
-    <h2 class="section-title">專業照護，從正確的起點出發</h2>
-    <p class="section-sub">我們不只是課程，更是您進入長照產業最可靠的夥伴</p>
-  </div>
-  <div class="why-grid">
-    <div class="why-card">
-      <div class="why-icon">📋</div>
-      <div class="why-title">符合長照3.0最新規範</div>
-      <div class="why-desc">課程內容緊跟政府政策，讓您學到的技能直接對應實際職場需求，不走冤枉路。</div>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">👩‍🏫</div>
-      <div class="why-title">資深照護師親授</div>
-      <div class="why-desc">所有講師均具備多年第一線照護經驗，分享真實案例，讓學習更貼近實務。</div>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🎯</div>
-      <div class="why-title">系統化學習路徑</div>
-      <div class="why-desc">從基礎照護技能到進階護理知識，循序漸進，即使零基礎也能快速上手。</div>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">💼</div>
-      <div class="why-title">就業媒合支援</div>
-      <div class="why-desc">結業後提供就業媒合資源，協助您順利進入長照機構、居家照護等多元職場。</div>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🌐</div>
-      <div class="why-title">線上線下彈性學習</div>
-      <div class="why-desc">不受時間地點限制，上班族、全職媽媽、退休人士都能輕鬆兼顧課程。</div>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🤝</div>
-      <div class="why-title">學員社群長期支持</div>
-      <div class="why-desc">加入我們的學員社群，持續獲得最新長照資訊、同儕交流與職涯支持。</div>
-    </div>
-  </div>
-</section>
-
-<!-- CURRICULUM -->
-<section class="curriculum">
-  <div class="section-header">
-    <span class="section-label">課程內容</span>
-    <h2 class="section-title">長照3.0照護課程模組</h2>
-    <p class="section-sub">完整涵蓋長照產業所需核心技能，從理論到實作全方位培訓</p>
-  </div>
-  <div class="curriculum-grid">
-    <div class="module-card">
-      <div class="module-num">MODULE 01</div>
-      <div class="module-title">長照政策與法規概論</div>
-      <ul class="module-list">
-        <li>長照3.0政策解析</li>
-        <li>長照服務體系架構</li>
-        <li>照護人員職責與倫理</li>
-        <li>相關法規與保障</li>
-      </ul>
-    </div>
-    <div class="module-card">
-      <div class="module-num">MODULE 02</div>
-      <div class="module-title">基礎照護技能實務</div>
-      <ul class="module-list">
-        <li>日常生活協助技巧</li>
-        <li>移位與翻身正確方法</li>
-        <li>個人衛生照護</li>
-        <li>飲食與營養照護</li>
-      </ul>
-    </div>
-    <div class="module-card">
-      <div class="module-num">MODULE 03</div>
-      <div class="module-title">老人健康與疾病認識</div>
-      <ul class="module-list">
-        <li>老化生理變化</li>
-        <li>常見慢性病照護</li>
-        <li>失智症照護技巧</li>
-        <li>緊急狀況處理</li>
-      </ul>
-    </div>
-    <div class="module-card">
-      <div class="module-num">MODULE 04</div>
-      <div class="module-title">溝通與心理支持</div>
-      <ul class="module-list">
-        <li>與長輩有效溝通</li>
-        <li>家屬溝通技巧</li>
-        <li>情緒支持與陪伴</li>
-        <li>照護者自我照顧</li>
-      </ul>
-    </div>
-    <div class="module-card">
-      <div class="module-num">MODULE 05</div>
-      <div class="module-title">輔具使用與環境設計</div>
-      <ul class="module-list">
-        <li>常用輔具介紹與操作</li>
-        <li>無障礙環境規劃</li>
-        <li>跌倒預防策略</li>
-        <li>居家安全評估</li>
-      </ul>
-    </div>
-    <div class="module-card">
-      <div class="module-num">MODULE 06</div>
-      <div class="module-title">職涯發展與就業準備</div>
-      <ul class="module-list">
-        <li>長照職場生態解析</li>
-        <li>履歷撰寫與面試技巧</li>
-        <li>薪資待遇與職涯規劃</li>
-        <li>就業媒合資源介紹</li>
-      </ul>
-    </div>
-  </div>
-  <div style="text-align:center; margin-top:48px;">
-    <a class="btn-primary" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noopener">
-      📩 詢問課程細節
-    </a>
-  </div>
-</section>
-
-<!-- AUDIENCE -->
-<section class="audience">
-  <div class="section-header center">
-    <span class="section-label">適合對象</span>
-    <h2 class="section-title">這門課程，是為您而設計的</h2>
-    <p class="section-sub">不論您的背景為何，只要有心，都能在長照領域找到屬於您的位置</p>
-  </div>
-  <div class="audience-grid">
-    <div class="audience-card">
-      <div class="audience-emoji">🔍</div>
-      <div class="audience-title">尋找穩定職涯方向</div>
-      <div class="audience-desc">長照產業需求持續增長，是少數逆景氣的穩定職業，現在入行正是時機。</div>
-    </div>
-    <div class="audience-card">
-      <div class="audience-emoji">👨‍👩‍👧‍👦</div>
-      <div class="audience-title">照顧家中長輩</div>
-      <div class="audience-desc">學習正確照護知識，讓您更有信心、更有效率地照顧家人，減少身心負擔。</div>
-    </div>
-    <div class="audience-card">
-      <div class="audience-emoji">🏥</div>
-      <div class="audience-title">醫療相關從業人員</div>
-      <div class="audience-desc">護理師、社工、物理治療師等，透過長照課程拓展服務範圍與職涯可能性。</div>
-    </div>
-    <div class="audience-card">
-      <div class="audience-emoji">🌟</div>
-      <div class="audience-title">想做有意義的工作</div>
-      <div class="audience-desc">照護是最有溫度的職業，讓您每天的付出都能真實改善他人的生命品質。</div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="section-header center">
-    <span class="section-label">學員心聲</span>
-    <h2 class="section-title">他們改變了，您也可以</h2>
-    <p class="section-sub">來自真實學員的分享，讓您看見課程帶來的改變</p>
-  </div>
-  <div class="testimonials-grid">
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-quote">「原本只是想照顧媽媽，上完課後發現自己愛上了這份工作。現在在居家照護機構上班，每天都很有成就感！」</p>
-      <div class="testi-author">
-        <div class="testi-avatar">😊</div>
-        <div>
-          <div class="testi-name">林小姐</div>
-          <div class="testi-role">居家照護員 · 台中</div>
+    <main>
+      <section class="section" aria-labelledby="hero-title">
+        <div class="section-grid">
+          <div class="cell-left hero-copy">
+            <span class="eyebrow">Long-Term Care Recruitment</span>
+            <h1 id="hero-title">加入照護好時光，把溫柔變成專業。</h1>
+            <p>照護好時光是長照中心招募平台，專注媒合有責任感、願意投入照顧工作的看護人才。我們提供清楚職務說明、實務支援與穩定溝通窗口，協助你在台灣長照現場安心上工。</p>
+            <div class="action-row">
+              <a class="cta-button" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noreferrer">立即 Line 應徵</a>
+              <a class="cta-outline" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noreferrer">先了解工作內容</a>
+            </div>
+            <div class="hero-micro" aria-label="核心優勢">
+              <span>長照中心背景清楚</span>
+              <span>台灣看護工作說明</span>
+              <span>Line 即時諮詢</span>
+              <span>應徵流程簡單明確</span>
+            </div>
+          </div>
+          <div class="cell-right hero-panel">
+            <div class="hero-visual">
+              <div class="metric-board">
+                <article class="value-stat">
+                  <strong>1 對 1</strong>
+                  <span>應徵問題可直接透過 Line 詢問，快速了解職缺與安排。</span>
+                </article>
+                <article class="value-stat">
+                  <strong>長照</strong>
+                  <span>聚焦居家與照顧現場需求，讓工作內容更清楚、不模糊。</span>
+                </article>
+                <article class="value-stat">
+                  <strong>在台</strong>
+                  <span>以台灣照護工作情境為核心，強調實際執行的照顧任務。</span>
+                </article>
+                <article class="value-stat">
+                  <strong>穩定</strong>
+                  <span>從認識公司到應徵聯繫，都有一致窗口協助你完成流程。</span>
+                </article>
+              </div>
+              <div class="science-note">
+                <strong>我們重視的不只是媒合，更是照顧品質</strong>
+                <p>照護好時光相信，好的看護來自清楚的工作期待、互相尊重的合作方式，以及對長者與家庭真正有幫助的照顧能力。</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-quote">「課程內容非常實用，老師都有豐富的實務經驗。結業後順利找到長照機構的工作，薪資也比之前好很多。」</p>
-      <div class="testi-author">
-        <div class="testi-avatar">🙂</div>
-        <div>
-          <div class="testi-name">陳先生</div>
-          <div class="testi-role">長照機構照服員 · 台北</div>
+      </section>
+
+      <section class="section" aria-labelledby="about-title">
+        <div class="section-grid">
+          <div class="cell-left section-intro">
+            <span class="kicker">About Us</span>
+            <h2 id="about-title">我們是以陪伴、專業、穩定為核心的長照中心。</h2>
+            <p>照護好時光專注長期照顧服務，希望建立一個讓家庭放心、讓照護者安心投入的合作環境。網站以招募看護為主，讓有心投入照護工作的夥伴，能快速了解我們的理念與需求。</p>
+          </div>
+          <div class="cell-right section-body">
+            <div class="feature-grid">
+              <article class="feature-card">
+                <div class="feature-icon">01</div>
+                <h3>清楚的照護理念</h3>
+                <p>我們重視長者的尊嚴、家庭的信任，以及照護者在現場的專業判斷，不用模糊話術招募，而是把期待說清楚。</p>
+              </article>
+              <article class="feature-card">
+                <div class="feature-icon">02</div>
+                <h3>以台灣長照需求出發</h3>
+                <p>內容聚焦台灣常見的照護情境，包括日常陪伴、生活協助、基本清潔與回報溝通，讓求職者更容易理解工作輪廓。</p>
+              </article>
+              <article class="feature-card">
+                <div class="feature-icon">03</div>
+                <h3>溝通窗口單純</h3>
+                <p>所有諮詢與應徵都集中到 Line，方便快速回覆，也讓看護夥伴不用在多個平台之間反覆切換。</p>
+              </article>
+              <article class="feature-card">
+                <div class="feature-icon">04</div>
+                <h3>重視合作穩定性</h3>
+                <p>我們期待招募到願意長期投入、對照顧工作有耐心與責任感的人，和團隊一起建立值得信賴的照護服務。</p>
+              </article>
+            </div>
+            <div class="action-row">
+              <a class="cta-button" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noreferrer">Line 詢問職缺</a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-quote">「我是全職媽媽，利用線上課程的彈性安排學習時間。現在兼職做居家照護，不但有額外收入，還覺得很有意義。」</p>
-      <div class="testi-author">
-        <div class="testi-avatar">👩</div>
-        <div>
-          <div class="testi-name">王媽媽</div>
-          <div class="testi-role">兼職居家照護員 · 高雄</div>
+      </section>
+
+      <section class="section" aria-labelledby="duties-title">
+        <div class="section-grid">
+          <div class="cell-left section-intro">
+            <span class="kicker">Taiwan Caregiver Duties</span>
+            <h2 id="duties-title">在台灣，看護通常需要做哪些事情？</h2>
+            <p>這一區直接說明台灣看護常見工作內容，幫助應徵者先了解日常任務，也讓真正適合照護工作的夥伴更有方向地加入。</p>
+          </div>
+          <div class="cell-right section-body">
+            <div class="role-sheet">
+              <div class="role-panel">
+                <h3>常見工作內容</h3>
+                <p>實際工作會依個案身體狀況與家庭需求調整，但大多圍繞生活照顧、陪伴支持與日常觀察三大面向。</p>
+                <div class="duty-list">
+                  <div class="duty-item"><span>協助起居與移動</span><span>日常照顧</span></div>
+                  <div class="duty-item"><span>協助用餐、備餐與服藥提醒</span><span>生活支持</span></div>
+                  <div class="duty-item"><span>陪同散步、聊天與情緒陪伴</span><span>陪伴關懷</span></div>
+                  <div class="duty-item"><span>協助個人清潔與環境整理</span><span>基本整潔</span></div>
+                  <div class="duty-item"><span>觀察身體狀況並回報家屬或單位</span><span>溝通回報</span></div>
+                </div>
+              </div>
+              <div class="support-panel">
+                <h3>適合這份工作的人</h3>
+                <div class="support-stack">
+                  <div class="support-box">
+                    <strong>有耐心</strong>
+                    <p>願意花時間陪伴長者，面對重複性需求時仍保持穩定與溫和。</p>
+                  </div>
+                  <div class="support-box">
+                    <strong>有責任感</strong>
+                    <p>能確實完成照顧事項，也願意主動回報個案狀況與異常變化。</p>
+                  </div>
+                  <div class="support-box">
+                    <strong>願意學習</strong>
+                    <p>理解每位被照顧者情況不同，願意配合安排並持續調整照護方式。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+
+      <section class="section" aria-labelledby="why-join-title">
+        <div class="section-grid">
+          <div class="cell-left section-intro">
+            <span class="kicker">Why Join</span>
+            <h2 id="why-join-title">我們想找的，不只是人力，而是真正願意照顧人的夥伴。</h2>
+            <p>對很多家庭來說，看護不只是工作角色，更是每天最靠近生活的人。這也是我們招募時最重視的價值：同理、細心與穩定。</p>
+          </div>
+          <div class="cell-right section-body">
+            <div class="story-grid">
+              <article class="story-card">
+                <h3>把照顧做得有溫度</h3>
+                <p>從說話方式、陪伴節奏到生活觀察，我們希望每一次照顧都能讓長者感到安心與被尊重。</p>
+                <div class="story-meta"><span>尊重長者</span><span>日常陪伴</span></div>
+              </article>
+              <article class="story-card">
+                <h3>把工作內容說得清楚</h3>
+                <p>網站不走誇張包裝，而是讓應徵者知道真正要做的事情，降低到職後的落差感。</p>
+                <div class="story-meta"><span>內容透明</span><span>期待明確</span></div>
+              </article>
+              <article class="story-card">
+                <h3>把聯繫流程變簡單</h3>
+                <p>所有轉換都集中在 Line，想了解、想應徵、想先問問題，都能直接開始，不需要繞路。</p>
+                <div class="story-meta"><span>快速應徵</span><span>單一入口</span></div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="flow-title">
+        <div class="section-grid">
+          <div class="cell-left section-intro">
+            <span class="kicker">Join Flow</span>
+            <h2 id="flow-title">應徵流程簡單，先從 Line 聊聊開始。</h2>
+            <p>讓有興趣加入的人可以快速進入聯繫，不用填太多複雜表單，先把重點問題談清楚，再安排後續流程。</p>
+          </div>
+          <div class="cell-right section-body">
+            <div class="timeline-grid">
+              <article class="timeline-card">
+                <h3>Step 1｜加入 Line</h3>
+                <p>先透過 Line 取得聯繫，告訴我們你是否有照護經驗、可配合時段，以及想了解的內容。</p>
+                <div class="timeline-meta"><span>快速接觸</span></div>
+              </article>
+              <article class="timeline-card">
+                <h3>Step 2｜了解職務內容</h3>
+                <p>我們會提供公司背景、工作說明與合作方式，讓你確認這份工作是否符合期待。</p>
+                <div class="timeline-meta"><span>資訊透明</span></div>
+              </article>
+              <article class="timeline-card">
+                <h3>Step 3｜安排後續應徵</h3>
+                <p>雙方確認方向後，再進一步安排應徵與媒合流程，讓加入更有效率。</p>
+                <div class="timeline-meta"><span>穩定媒合</span></div>
+              </article>
+            </div>
+            <div class="action-row">
+              <a class="cta-outline" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noreferrer">現在就用 Line 聯繫</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="faq-title">
+        <div class="section-grid">
+          <div class="cell-left section-intro">
+            <span class="kicker">FAQ</span>
+            <h2 id="faq-title">看護招募常見問題</h2>
+            <p>把求職者最常想問的重點先整理好，讓對工作有興趣的人能更快判斷是否適合自己。</p>
+          </div>
+          <div class="cell-right section-body">
+            <div class="faq-grid">
+              <article class="faq-item">
+                <h3>沒有長照經驗可以先詢問嗎？</h3>
+                <p>可以。若你對看護工作有興趣，仍可先透過 Line 聯繫，了解基本工作內容與需要具備的條件。</p>
+              </article>
+              <article class="faq-item">
+                <h3>工作內容會很模糊嗎？</h3>
+                <p>不會。我們會以台灣常見照護情境說明，包括起居協助、陪伴、清潔整理與回報溝通等內容。</p>
+              </article>
+              <article class="faq-item">
+                <h3>要怎麼投遞或應徵？</h3>
+                <p>網站所有按鈕都直接連到 Line，加入後即可開始詢問職缺、表達應徵意願，進一步安排後續流程。</p>
+              </article>
+              <article class="faq-item">
+                <h3>這個網站最主要的用途是什麼？</h3>
+                <p>主要用途是招募看護，讓有意加入長照工作的夥伴，能快速認識照護好時光並直接展開聯繫。</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="cta-title">
+        <div class="section-grid">
+          <div class="cell-full final-cta">
+            <span class="eyebrow">Care Starts Here</span>
+            <h2 id="cta-title">如果你願意照顧人，照護好時光正在等你加入。</h2>
+            <p>現在就透過 Line 聯繫我們，快速了解公司背景、看護工作內容與應徵方式，讓你的下一份照護工作從這裡開始。</p>
+            <div class="action-row" style="justify-content:center;">
+              <a class="cta-button" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noreferrer">加入 Line 立即應徵</a>
+              <a class="cta-outline" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noreferrer">先詢問再決定</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>照護好時光｜長照中心看護招募、公司介紹、台灣看護工作內容、Line 應徵入口</span>
+    </footer>
   </div>
-</section>
-
-<!-- FAQ -->
-<section class="faq">
-  <div class="section-header center">
-    <span class="section-label">常見問題</span>
-    <h2 class="section-title">您可能想知道的</h2>
-  </div>
-  <div class="faq-list">
-    <div class="faq-item">
-      <div class="faq-q">我沒有任何醫療背景，可以報名嗎？</div>
-      <div class="faq-a">完全可以！長照3.0課程從零基礎開始設計，不需要任何醫療或照護背景。只要您有心學習，我們的系統化課程會帶您一步步建立完整的照護能力。</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">課程多久可以完成？有彈性嗎？</div>
-      <div class="faq-a">課程提供線上與線下混合學習模式，您可以依照自己的時間安排進度。一般學員約需2-3個月完成，上班族利用週末與晚上也能順利結業。</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">結業後能找到工作嗎？薪資如何？</div>
-      <div class="faq-a">我們提供就業媒合服務，結業學員就業率達95%。長照照服員起薪約28,000-35,000元，有經驗者可達40,000元以上，且隨著長照需求增加，薪資持續成長。</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">課程費用如何？有分期付款嗎？</div>
-      <div class="faq-a">課程費用依選擇的方案而定，我們提供多種彈性付款方式，包含分期零利率選項。歡迎透過LINE聯繫我們，了解最新優惠方案與詳細費用。</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">上完課程可以取得什麼證書？</div>
-      <div class="faq-a">結業後將頒發課程結業證書，並協助學員準備參加政府認可的照顧服務員技術士技能檢定，取得國家認可的專業證照。</div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <span class="section-label">立即行動</span>
-  <h2>開始您的長照照護之路<br/>現在就是最好的時機</h2>
-  <p>加入超過500位結業學員的行列，用專業照護技能，創造有意義的職涯與生活</p>
-  <div class="cta-group">
-    <a class="btn-white" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noopener">
-      🎓 了解課程詳情
-    </a>
-    <a class="btn-line-large" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.96 1.53 5.59 3.93 7.3L5 21l2.88-1.5C9.12 19.8 10.53 20 12 20c5.52 0 10-4.03 10-9S17.52 2 12 2z"/></svg>
-      LINE 免費諮詢
-    </a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 長照3.0照護課程 · 專業照護，從這裡開始</p>
-  <p style="margin-top:8px;">
-    <a href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noopener">LINE 聯絡我們</a>
-  </p>
-</footer>
-
-<!-- LINE FLOAT BUTTON -->
-<a class="line-float" href="https://line.me/ti/p/mKkX_ZUmwg" target="_blank" rel="noopener" aria-label="LINE 諮詢">
-  <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.96 1.53 5.59 3.93 7.3L5 21l2.88-1.5C9.12 19.8 10.53 20 12 20c5.52 0 10-4.03 10-9S17.52 2 12 2z"/></svg>
-</a>
-
 </body>
 </html>
